@@ -15,11 +15,15 @@ const userSchema = new Schema ({
         required: true,
         lowercase: true,
         validate: {
-            validator(email){
-                return models.User.findOne({email})
-                        .then(user => !user)
-                        .catch(()=> false)
-            }
+            async validator(email){
+                try{
+                  const user = await models.User.findOne({email})
+                  return !user
+                }catch(err){
+                    return fasle
+                }
+            },
+            message:"El E-mail ya existe"
         }
     },
     password: {
@@ -33,30 +37,14 @@ const userSchema = new Schema ({
         maxlength: 13,
         trim: true
     },
-    tokens : [
-        {
+    token :{
         type: String,
-        }
-    ],
-    profilePhoto: {
-        type: String
-    }
+    },
 },{
     timestamps: true
 })
 
-lenderSchema.methods.generateAuthToken = async function () {
-    return jwt.sign({_id: this._id.toString()}, process.env.SECRET_KEY, {expiresIn: "1 days"})
-}
 
-lenderSchema.methods.encryptPassword = async function () {
-    this.password = await bcrypt.hash(this.password, 8)
-    return this.password
-}
-
-lenderSchema.methods.getPublicData = function () {
-    return (({name, email, tokens, tasks}) => ({name, email, tokens, tasks}))(this) 
-}
 
 const User = new model("User", userSchema)
 
