@@ -11,6 +11,7 @@ const Chat = require('./models/chat.model');
 const Message = require('./models/message.model');
 const chatRouter = require('./routes/chat.routes');
 const userRouter = require('./routes/user.routes');
+const mensualidadesRouter = require('./routes/mensualidades.routes');
 
 const db = require("./connection/dbConnection");
 
@@ -23,6 +24,7 @@ app.use(helmet())
 
 app.use("/chat",chatRouter)
 app.use("/user", userRouter)
+app.use("/mensualidades", mensualidadesRouter)
 
 
 io.of("/admin").on("connection", socket => {

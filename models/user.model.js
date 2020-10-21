@@ -40,6 +40,12 @@ const userSchema = new Schema ({
     token :{
         type: String,
     },
+    mensualidades:{
+        type:[{
+            type: Schema.Types.ObjectId, 
+            ref:"Mensualidades"
+        }]
+    }
 },{
     timestamps: true
 })

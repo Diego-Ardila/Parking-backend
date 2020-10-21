@@ -40,5 +40,15 @@ module.exports = {
     }catch(err){
       res.status(400).json(err.message)
     }
+  },
+
+  getUser: async function (req,res) {
+    const { userId } = req
+    try{
+      const user = await User.findById(userId).populate("mensualidades")
+      res.status(200).json(user)
+    }catch(err){
+      res.status(400).json(err.message)
+    }
   }
-}
+} 
