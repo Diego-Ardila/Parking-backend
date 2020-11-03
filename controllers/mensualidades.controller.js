@@ -26,8 +26,16 @@ module.exports = {
         }
     },
 
-    async get(req,res){
-        console.log(req.body)
+    async paid(req,res){
+        const {mensualidadId} = req.body
+        try{
+            const mensualidad = await Mensualidades.findById(mensualidadId)
+            mensualidad.paid = true
+            mensualidad.save({validateBeforeSave: false})
+            res.status(200).json(mensualidad)
+        }catch(err){
+            res.status(400).json(err.message)
+        }
     },
 
     async update(req,res){
@@ -36,9 +44,23 @@ module.exports = {
             const inDate = DateTime.fromISO(date)
             const finDate = inDate.plus({months:1})
             const mensualidad = await Mensualidades.findOneAndUpdate({ badge },
-                                                                     { inDate: inDate.toLocaleString(), finDate: finDate.toLocaleString() },
+                                                                     {inDate: inDate.toLocaleString(), 
+                                                                      finDate: finDate.toLocaleString(),
+                                                                      checked: false },
                                                                      {new: true})
             res.status(200).json(mensualidad)
+        }catch(err){
+            res.status(400).json(err.message)
+        }
+    },
+
+    async get(req,res){
+        const {mensualidadId} = req.body
+        try{
+            const mensualidad = await Mensualidades.findById(mensualidadId)
+            mensualidad.paid = true
+            mensualidad.save({validateBeforeSave: false})
+            res.status(200).json()
         }catch(err){
             res.status(400).json(err.message)
         }

@@ -17,7 +17,11 @@ module.exports = {
       await user.save({validateBeforeSave: false})
       res.status(200).json({token, userId: user._id})
     }catch(err){
-      res.status(400).json(err.message)
+      if(err.errors.email.properties.message){
+        res.status(400).json(err.errors.email.properties.message)
+      }else{
+        res.status(400).json(err.message)
+      }
     }
   },
   async login(req, res) {
@@ -46,6 +50,7 @@ module.exports = {
     const { userId } = req
     try{
       const user = await User.findById(userId).populate("mensualidades")
+      if (!user) throw new Error("usuario invalido")
       res.status(200).json(user)
     }catch(err){
       res.status(400).json(err.message)

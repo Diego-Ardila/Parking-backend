@@ -12,6 +12,7 @@ const Message = require('./models/message.model');
 const chatRouter = require('./routes/chat.routes');
 const userRouter = require('./routes/user.routes');
 const mensualidadesRouter = require('./routes/mensualidades.routes');
+const adminRouter = require('./routes/admin.routes');
 
 const db = require("./connection/dbConnection");
 
@@ -24,6 +25,7 @@ app.use(helmet())
 
 app.use("/chat",chatRouter)
 app.use("/user", userRouter)
+app.use("/admin", adminRouter)
 app.use("/mensualidades", mensualidadesRouter)
 
 

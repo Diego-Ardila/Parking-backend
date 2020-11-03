@@ -20,7 +20,7 @@ const userSchema = new Schema ({
                   const user = await models.User.findOne({email})
                   return !user
                 }catch(err){
-                    return fasle
+                    return false
                 }
             },
             message:"El E-mail ya existe"

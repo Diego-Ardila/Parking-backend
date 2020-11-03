@@ -32,6 +32,14 @@ const mensualidadesSchema = new Schema({
     },
     price: {
         type: String
+    },
+    paid:{
+        type: Boolean,
+        default: false
+    },
+    checked:{
+        type: Boolean,
+        default: false
     }
 },{
     timestamps: true
