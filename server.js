@@ -13,6 +13,7 @@ const chatRouter = require('./routes/chat.routes');
 const userRouter = require('./routes/user.routes');
 const mensualidadesRouter = require('./routes/mensualidades.routes');
 const adminRouter = require('./routes/admin.routes');
+const lavaderoRouter = require('./routes/lavadero.routes');
 
 const db = require("./connection/dbConnection");
 
@@ -27,6 +28,7 @@ app.use("/chat",chatRouter)
 app.use("/user", userRouter)
 app.use("/admin", adminRouter)
 app.use("/mensualidades", mensualidadesRouter)
+app.use("/lavadero", lavaderoRouter)
 
 
 io.of("/admin").on("connection", socket => {

@@ -21,7 +21,6 @@ module.exports = {
             user.save({validateBeforeSave: false})
             res.status(200).json(mensualidad)
         }catch(err){
-            console.log(err.message)
             res.status(400).json(err.message)
         }
     },
@@ -46,7 +45,8 @@ module.exports = {
             const mensualidad = await Mensualidades.findOneAndUpdate({ badge },
                                                                      {inDate: inDate.toLocaleString(), 
                                                                       finDate: finDate.toLocaleString(),
-                                                                      checked: false },
+                                                                      checked: false,
+                                                                      paid: false },
                                                                      {new: true})
             res.status(200).json(mensualidad)
         }catch(err){

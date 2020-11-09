@@ -55,5 +55,16 @@ module.exports = {
     }catch(err){
       res.status(400).json(err.message)
     }
+  },
+
+  async updateUser(req,res) {
+    const data = req.body
+    const { userId } = req
+    try{
+      const user = await User.findOneAndUpdate({_id: userId},{...data},{new:true})
+      res.status(200).json(user)
+    }catch(err){
+      res.status(400).json(err.message)
+    }
   }
 } 

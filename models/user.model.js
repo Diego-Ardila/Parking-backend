@@ -45,6 +45,10 @@ const userSchema = new Schema ({
             type: Schema.Types.ObjectId, 
             ref:"Mensualidades"
         }]
+    },
+    lavadero:{
+        type: Schema.Types.ObjectId,
+        ref:"Lavadero"
     }
 },{
     timestamps: true

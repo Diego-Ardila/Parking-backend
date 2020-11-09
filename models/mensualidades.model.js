@@ -1,4 +1,4 @@
-const {Schema, model} = require("mongoose");
+const {Schema, model, models} = require("mongoose");
 
 
 const mensualidadesSchema = new Schema({
@@ -10,7 +10,18 @@ const mensualidadesSchema = new Schema({
     badge:{
         type: String,
         required: true,
-        uppercase: true
+        uppercase: true,
+        validate: {
+            async validator(badge){
+                try{
+                  const mensualidad = await models.Mensualidades.findOne({badge})
+                  return !mensualidad
+                }catch(err){
+                    return false
+                }
+            },
+            message:"Esa placa ya existe"
+        }
     },
     cedula:{
         type: String

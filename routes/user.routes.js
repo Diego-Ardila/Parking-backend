@@ -6,6 +6,8 @@ const { auth } = require('../utils/middlewares')
 router.route('/').post(userController.createUser)
 router.route('/login').post(userController.login)
 router.route('/').get(auth, userController.getUser)
+router.route('/').put(auth, userController.updateUser)
+
 
 
 module.exports = router
