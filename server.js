@@ -77,6 +77,9 @@ io.of("/admin").on("connection", socket => {
     })
 })
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
-
-server.listen(8000, () => console.log('App running on http://localhost:8000'));
+server.listen(port , () => console.log(`App running on port: ${port}`));
