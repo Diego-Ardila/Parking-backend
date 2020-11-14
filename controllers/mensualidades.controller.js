@@ -13,8 +13,8 @@ module.exports = {
             const finDate = inDate.plus({months:1})
             const mensualidad = await Mensualidades.create({
                                                     ...req.body, 
-                                                    inDate: inDate.toLocaleString(), 
-                                                    finDate: finDate.toLocaleString(),
+                                                    inDate: inDate.setLocale('fr').toLocaleString(), 
+                                                    finDate: finDate.setLocale('fr').toLocaleString(),
                                                     userId
                                                     })
             user.mensualidades.push(mensualidad._id)
@@ -43,8 +43,8 @@ module.exports = {
             const inDate = DateTime.fromISO(date)
             const finDate = inDate.plus({months:1})
             const mensualidad = await Mensualidades.findOneAndUpdate({ badge },
-                                                                     {inDate: inDate.toLocaleString(), 
-                                                                      finDate: finDate.toLocaleString(),
+                                                                     {inDate: inDate.setLocale('fr').toLocaleString(), 
+                                                                      finDate: finDate.setLocale('fr').toLocaleString(),
                                                                       checked: false,
                                                                       paid: false },
                                                                      {new: true})

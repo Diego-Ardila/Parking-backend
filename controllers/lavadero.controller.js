@@ -7,7 +7,7 @@ module.exports = {
         try{
             const {date, badge} = req.body
             const { userId } = req
-            const newDate = DateTime.fromISO(date).toLocaleString()
+            const newDate = DateTime.fromISO(date).setLocale('fr').toLocaleString()
             const user = await User.findById(userId)
             const lavado = await Lavadero.create({
                                                     date: newDate,
